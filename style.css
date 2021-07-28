@@ -27,6 +27,10 @@ h1 {
     margin: 1rem;
 }
 
+.github {
+    text-align: center;
+}
+
 main {
     max-width: 600px;
     margin: 0rem auto 2rem;
@@ -78,6 +82,6 @@ footer {
     text-align: center;
 }
 
-footer a {
+footer a, .github a{
     color: inherit;
 }
