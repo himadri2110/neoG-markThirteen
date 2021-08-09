@@ -1,5 +1,5 @@
 let inputDate = document.querySelector('#inputDate');
-let checkBtn = document.querySelector('#checkBtn');
+let form = document.querySelector('#form');
 
 let happyDiv = document.querySelector('.happy-animation');
 let sadDiv = document.querySelector('.sad-animation');
@@ -19,60 +19,52 @@ sadDiv.style.display = 'none';
 happyDiv.style.display = 'none';
 loadingDiv.style.display = 'none';
 
-checkBtn.addEventListener('click', () => {
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    if(inputDate.value === '') {
-        resultDiv.style.display = 'block';
-        resultDiv.innerText = '*Please select a date.';
-        result.style.margin = '2rem auto';
+    resultDiv.innerText = '';
+    result.style.margin = 'auto';
 
-        footerDiv.scrollIntoView({behavior: "smooth", bottom: 0});
+    dateArray = inputDate.value.split('-');
 
-    } 
-    else {
-        resultDiv.innerText = '';
-        result.style.margin = 'auto';
+    year = dateArray[0].toString();
+    month = dateArray[1].toString();
+    date = dateArray[2].toString();
 
-        dateArray = inputDate.value.split('-');
+    showOutput = formats(date, month, year);
 
-        year = dateArray[0].toString();
-        month = dateArray[1].toString();
-        date = dateArray[2].toString();
+    sadDiv.style.display = 'none';
+    happyDiv.style.display = 'none';
+    resultDiv.style.display = 'none';
+
+    loadingDiv.style.display = 'block';
+
+    footerDiv.scrollIntoView({behavior: "smooth", bottom: 0});
+
+    setTimeout(() => {
     
-        showOutput = formats(date, month, year);
+        loadingDiv.style.display = 'none';
 
-        sadDiv.style.display = 'none';
-        happyDiv.style.display = 'none';
-        resultDiv.style.display = 'none';
+        if(showOutput) {
+            happyDiv.style.display = 'block';
+            sadDiv.style.display = 'none';
 
-        loadingDiv.style.display = 'block';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Yayy! Your birthday is palindrome in the format <b>${showOutput}</b>.`;
+            resultDiv.scrollIntoView({behavior: "smooth", bottom: 0});
+        } else {
 
-        footerDiv.scrollIntoView({behavior: "smooth", bottom: 0});
+            paliArray = findNextPalindrome(inputDate.value);
 
-        setTimeout(() => {
-        
-            loadingDiv.style.display = 'none';
+            sadDiv.style.display = 'block';
+            happyDiv.style.display = 'none';
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `OOPS! Your birthday is not a palindrome. The nearest palindrome is <b>${paliArray[0]}</b> and you missed it by <b>${paliArray[1]}</b> days.`;
+            resultDiv.scrollIntoView({behavior: "smooth", bottom: 0});
+        }
+    }, 3500);
     
-            if(showOutput) {
-                happyDiv.style.display = 'block';
-                sadDiv.style.display = 'none';
-    
-                resultDiv.style.display = 'block';
-                resultDiv.innerHTML = `Yayy! Your birthday is palindrome in the format <b>${showOutput}</b>.`;
-                resultDiv.scrollIntoView({behavior: "smooth", bottom: 0});
-            } else {
-    
-                paliArray = findNextPalindrome(inputDate.value);
-    
-                sadDiv.style.display = 'block';
-                happyDiv.style.display = 'none';
-    
-                resultDiv.style.display = 'block';
-                resultDiv.innerHTML = `OOPS! Your birthday is not a palindrome. The nearest palindrome is <b>${paliArray[0]}</b> and you missed it by <b>${paliArray[1]}</b> days.`;
-                resultDiv.scrollIntoView({behavior: "smooth", bottom: 0});
-            }
-        }, 3500);
-    } 
 });
 
 function formats(date, month, year) {

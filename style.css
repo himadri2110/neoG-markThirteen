@@ -22,9 +22,13 @@ body {
     color: var(--text);
 }
 
+header {
+    margin: 1rem;
+}
+
 h1 {
     text-align: center;
-    margin: 1rem;
+    margin: 1rem 0;
 }
 
 .github {
@@ -39,6 +43,13 @@ main {
 
 .details {
     margin: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input, button {
