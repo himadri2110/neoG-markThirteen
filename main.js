@@ -13,7 +13,7 @@ let happyLottie = document.querySelector('#happy-lottie');
 let sadLottie = document.querySelector('#sad-lottie');
 let loadingLottie = document.querySelector('#loading-lottie');
 
-const daysOfMonth = [31, Number(`${new Date().getFullYear() % 4 ? 29 : 28}`), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 sadDiv.style.display = 'none';
 happyDiv.style.display = 'none';
