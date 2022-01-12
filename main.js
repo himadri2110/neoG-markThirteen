@@ -171,5 +171,9 @@ const findNextPalindrome = (inputDate) => {
     if (nextFormat) {
       return [nextFormat, daysElapsed];
     }
+<<<<<<< HEAD
   }
 };
+=======
+}
+>>>>>>> 4fb9b4c67a2862b1dab65c4f8ad1e7c071530fb8
